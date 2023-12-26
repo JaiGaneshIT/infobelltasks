@@ -1,4 +1,4 @@
-## Installing applications on first login by users
+## Installing applications on first logon by users
 ### Creating a bash script to automate the installation process.
  > Listed application should be installed :
   * openssh-server
