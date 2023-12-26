@@ -9,7 +9,7 @@ ten_users(){
 
 #create a new user with the specified password
   useradd -m -s /bin/bash "$username"
-  echo "$username:$password" | chpasswd       # can't change pass
+  echo "$username:$password" | chpasswd      
 # add user to the sudo group
   usermod -aG sudo "$username"
   echo "user '$username' have added in group"
