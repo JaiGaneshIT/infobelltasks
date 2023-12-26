@@ -7,4 +7,4 @@
 > Targeted operating system is centos 7
 
 ## prerequisite
- * Repo's would up-to-date.
+ * Repo's should up-to-date.
