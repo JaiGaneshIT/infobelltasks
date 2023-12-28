@@ -5,6 +5,8 @@
   * Adding the users to the sudo group
   * Finally,Executing the script.
 
+##EXAMPLE
+
 ```ten_users "Yu_Ir_po" "yvonne"
 ten_users "BrKiOg" "brain"
 ten_users "NaWaPa" "natalie"
