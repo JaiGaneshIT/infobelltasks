@@ -1,8 +1,9 @@
 # Creating Multiple users with `Bash Script`
 ### Here
 > We're creating Ten users with Sudo permissions for both .Deb and .Rpm package mgmts:
-  * Firstly of all the script will check the machine kind and accordingly it'll initiate .
-  * And the Function will call the ```usrname``` and ```passwd``` which have declared
+  * Firstly ,the script execute and check the machine kind .
+  * Accordingly it'll initiate the functions.
+  * The Function will call the ```usrname``` and ```passwd``` which have declared
   * Then the users will created, & added to the sudo group
   * Finally
 
