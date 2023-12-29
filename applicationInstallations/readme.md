@@ -4,7 +4,10 @@
   * openssh-server
   * net-tools
   * Docker-Engine
-> Targeted operating system is centos 7
+> Targeted distro's RHEL and Debian.
+
+### Summary
+ *
 
 ## prerequisite
  * Repo's should be up-to-date.
