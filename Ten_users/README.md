@@ -5,7 +5,7 @@
   * Accordingly it'll initiate the functions.
   * The Function will call the ```usrname``` and ```passwd``` which have declared
   * Then the users will created, & added to the sudo group
-  * Finally
+  * Finally , the output will be displayed throughput the Terminal.
 
 ## EXAMPLE
 
