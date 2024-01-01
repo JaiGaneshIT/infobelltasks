@@ -1,58 +1,52 @@
-#!/bin/bash
+#!/bin/sh
 
-# Function to check if a package is installed on Debian-based systems
-is_package_installed_debian() {
-    dpkg -s "$1" &> /dev/null
-}
+# Define the list of packages to check and install
+packages="openssh* net-tools docker*"
 
-# Function to install a package on Debian-based systems
-install_package_debian() {
-    sudo apt-get install -y "$1"
-}
-
-# Function to check if a package is installed on Red Hat-based systems
-is_package_installed_rhel() {
-    rpm -q "$1" &> /dev/null
-}
-
-# Function to install a package on Red Hat-based systems
-install_package_rhel() {
-    sudo yum install -y "$1"
-    # For dnf (Fedora, RHEL 8+), replace the above line with:
-    # sudo dnf install -y "$1"
-}
-
-# Function to prompt the user for confirmation
-prompt_for_installation() {
-    read -p "Do you want to install $1? (y/n): " choice
-    case "$choice" in
-        y|Y )
-            return 0 ;; # User chose to install
-        * )
-            return 1 ;; # User chose not to install
-    esac
-}
-
-PACKAGES=("openssh*" "net-tools" "docker*")
-
-for package in "${PACKAGES[@]}"; do
-    if is_package_installed_debian "$package" || is_package_installed_rhel "$package"; then
-        echo "$package is already installed."
-    else
-        echo "$package is not installed."
-        if prompt_for_installation "$package"; then
-            echo "Installing $package..."
-            if [ -f /etc/debian_version ]; then
-                install_package_debian "$package"
-            elif [ -f /etc/redhat-release ]; then
-                install_package_rhel "$package"
+# Function to check if a package is installed on CentOS 7
+check_centos() {
+    for package in $packages; do
+        if ! rpm -q $package > /dev/null 2>&1; then
+            echo "Package '$package' is not installed."
+            printf "Do you want to install it? (yes/no): "
+            read answer
+            if [ "$answer" = "y" ]; then
+                sudo yum install $package
             else
-                echo "Unsupported distribution."
-                exit 1
+                echo "Skipping installation of '$package'."
             fi
         else
-            echo "Skipping installation of $package."
+            echo "Package '$package' is already installed."
         fi
-    fi
-done
+    done
+}
+
+# Function to check if a package is installed on Ubuntu
+check_ubuntu() {
+    for package in $packages; do
+        if ! dpkg -l $package > /dev/null 2>&1; then
+            echo "Package '$package' is not installed."
+            printf "Do you want to install it? (yes/no): "
+            read answer
+            if [ "$answer" = "y" ]; then
+                sudo apt-get install $package
+            else
+                echo "Skipping installation of '$package'."
+            fi
+        else
+            echo "Package '$package' is already installed."
+        fi
+    done
+}
+
+# Detect the Linux distribution and call the appropriate function
+if [ -f "/etc/redhat-release" ]; then
+    echo "Detected CentOS 7"
+    check_centos
+elif [ -f "/etc/lsb-release" ]; then
+    echo "Detected Ubuntu"
+    check_ubuntu
+else
+    echo "Unsupported Linux distribution."
+fi
 
