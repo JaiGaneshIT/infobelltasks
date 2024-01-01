@@ -25,7 +25,7 @@ if id "$username" &>/dev/null; then
     echo "Collecting user history logs for $username..."
 
     # Use sudo to access log files
-    sudo grep -i "$username" "$user_history_log" > "$username"_history.log
+    sudo grep -i "$username" "$user_history_log" > /home/"$username"_history.log
 
     echo "User history logs for $username have been stored in $(pwd)/$username\_history.log"
 else
