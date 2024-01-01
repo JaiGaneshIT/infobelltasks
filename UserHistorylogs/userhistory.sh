@@ -1,7 +1,11 @@
 #!/bin/bash
 
+#prompt for the username
+
+read -p " Enter the username: " answer
+
 # Specify the username to collect history for
-username="jai"
+#username="jai"
 
 # Define the path to the user's home directory
 user_home=$(eval echo ~$username)
